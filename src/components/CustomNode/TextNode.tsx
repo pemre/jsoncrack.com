@@ -6,6 +6,13 @@ import useGraph from "src/store/useGraph";
 import useStored from "src/store/useStored";
 import * as Styled from "./styles";
 
+/** *********************************************************
+ *  IMPORT CUSTOMIZATION HELPERS
+ */
+import { getNodeStyleByType } from "../../../customize/utils/getNodeStyleByType";
+import { Title } from "../../../customize/components/Title";
+/** *********************************************************/
+
 const StyledExpand = styled.button`
   pointer-events: all;
   display: inline-flex;
@@ -66,6 +73,13 @@ const Node: React.FC<CustomNodeProps> = ({ node, x, y, hasCollapse = false }) =>
     else expandNodes(id);
   };
 
+  /** *********************************************************
+   *  USE CUSTOM CONFIG
+   */
+  const { customize } = node;
+  const _type = customize?.type || '';
+  /** *********************************************************/
+
   return (
     <Styled.StyledForeignObject
       width={width}
@@ -74,7 +88,9 @@ const Node: React.FC<CustomNodeProps> = ({ node, x, y, hasCollapse = false }) =>
       y={0}
       hasCollapse={isParent && hasCollapse}
       ref={ref}
+      style={getNodeStyleByType(_type)}
     >
+      {_type && <Title title={_type} />}
       {isImage ? (
         <StyledImageWrapper>
           <StyledImage src={text} width="70" height="70" loading="lazy" />

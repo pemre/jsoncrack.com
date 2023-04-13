@@ -2,14 +2,31 @@ import React from "react";
 import { CustomNodeProps } from "src/components/CustomNode";
 import * as Styled from "./styles";
 
+/** *********************************************************
+ *  IMPORT CUSTOMIZATION HELPERS
+ */
+import { getNodeStyleByType } from "../../../customize/utils/getNodeStyleByType";
+import { Title } from "../../../customize/components/Title";
+/** *********************************************************/
+
 const Node: React.FC<CustomNodeProps> = ({ node, x, y }) => {
   const { text, width, height, data } = node;
   const ref = React.useRef(null);
 
   if (data.isEmpty) return null;
 
+  /** *********************************************************
+   *  USE CUSTOM CONFIG
+   */
+  const { customize } = node;
+  const _type = customize?.type || '';
+  /** *********************************************************/
+
   return (
-    <Styled.StyledForeignObject width={width} height={height} x={0} y={0} ref={ref} isObject>
+    <Styled.StyledForeignObject width={width} height={height} x={0} y={0} ref={ref} isObject
+      style={getNodeStyleByType(_type)}
+    >
+      {_type && <Title title={_type} />}
       {text.map((val, idx) => {
         return (
           <Styled.StyledRow

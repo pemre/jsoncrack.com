@@ -4,6 +4,12 @@ import { addNodeToGraph } from "./addNodeToGraph";
 import { calculateNodeSize } from "./calculateNodeSize";
 import { States } from "./jsonParser";
 
+/** *********************************************************
+ *  IMPORT CUSTOMIZATION HELPERS
+ */
+import { FEATURES } from "../../../customize/config";
+/** *********************************************************/
+
 const isPrimitiveOrNullType = (type?: NodeType) => {
   return type === "boolean" || type === "string" || type === "number" || type === "null";
 };
@@ -41,7 +47,15 @@ export const traverse = (
       } else if (parentType === "array") {
         const nodeFromArrayId = addNodeToGraph({ graph, text: String(value) });
         if (myParentId) {
-          addEdgeToGraph(graph, myParentId, nodeFromArrayId);
+          /** *********************************************************
+           *  GROUP LAST TEXT NODES, E.g. Modifiers
+           */
+          if (FEATURES.GROUP_LAST_TEXT_NODES) {
+            graph.nodes[graph.nodes.length - 1].parent = myParentId;
+          } else {
+            addEdgeToGraph(graph, myParentId, nodeFromArrayId);
+          }
+          /** *********************************************************/
         }
       }
       if (nextType && parentType !== "array") {
@@ -173,7 +187,15 @@ export const traverse = (
           states.brothersNode = [];
 
           if (states.brothersParentId) {
-            addEdgeToGraph(graph, states.brothersParentId, brothersNodeId);
+            /** *********************************************************
+             *  GROUP LAST OBJECT NODES, E.g. Deal item variations
+             */
+            if (FEATURES.GROUP_LAST_OBJECT_NODES) {
+              graph.nodes[graph.nodes.length - 1].parent = states.brothersParentId;
+            } else {
+              addEdgeToGraph(graph, states.brothersParentId, brothersNodeId);
+            }
+            /** *********************************************************/
           } else {
             states.notHaveParent = [...states.notHaveParent, brothersNodeId];
           }

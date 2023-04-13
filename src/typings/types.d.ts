@@ -2,6 +2,7 @@ type CanvasDirection = "LEFT" | "RIGHT" | "DOWN" | "UP";
 
 interface NodeData<T = any> {
   id: string;
+  customize?: CustomizeData;
   disabled?: boolean;
   text?: any;
   path?: string;
@@ -15,6 +16,10 @@ interface NodeData<T = any> {
   className?: string;
   layoutOptions?: ElkNodeLayoutOptions;
   selectionDisabled?: boolean;
+}
+
+interface CustomizeData<T = any> {
+  type: string;
 }
 
 interface EdgeData<T = any> {

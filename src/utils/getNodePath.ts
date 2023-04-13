@@ -1,3 +1,9 @@
+/** *********************************************************
+ *  IMPORT CUSTOMIZATION HELPERS
+ */
+import { FEATURES } from "../../customize/config";
+/** *********************************************************/
+
 export function getNodePath(nodes: NodeData[], edges: EdgeData[], nodeId: string) {
   const { getParentsForNodeId } = require("reaflow");
 
@@ -38,8 +44,21 @@ export function getNodePath(nodes: NodeData[], edges: EdgeData[], nodeId: string
 
       if (i !== path.length - 1) {
         const toNodeId = path[i + 1];
-        const idx = edgesMap.get(curId).indexOf(toNodeId);
-        resolvedPath += `[${idx}]`;
+
+        /** *********************************************************
+         *  ENABLE/DISABLE FEATURES
+         */
+        // Grouping nodes breaks the Path feature. I'll disable for now.
+        if (
+          FEATURES.GROUP_LAST_OBJECT_NODES ||
+          FEATURES.GROUP_LAST_TEXT_NODES
+        ) {
+          resolvedPath += `[??]`;
+        } else {
+          const idx = edgesMap.get(curId).indexOf(toNodeId);
+          resolvedPath += `[${idx}]`;
+        }
+        /** *********************************************************/
       }
     }
 
