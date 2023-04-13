@@ -3,6 +3,7 @@ type CanvasDirection = "LEFT" | "RIGHT" | "DOWN" | "UP";
 interface NodeData<T = any> {
   id: string;
   customize?: CustomizeData;
+  parent?: string;
   disabled?: boolean;
   text?: any;
   path?: string;
