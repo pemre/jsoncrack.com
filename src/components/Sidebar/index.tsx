@@ -232,12 +232,14 @@ export const Sidebar: React.FC = () => {
           component={<AiOutlineDelete />}
         />
 
+        {/*
         <SidebarButton
           title="View Cloud"
           deviceDisplay="desktop"
           onClick={() => setVisible("cloud")(true)}
           component={<VscCloud />}
         />
+        */}
 
         <SidebarButton
           title="Settings"
@@ -247,11 +249,13 @@ export const Sidebar: React.FC = () => {
         />
       </StyledTopWrapper>
       <StyledBottomWrapper>
+        {/*
         <SidebarButton
           title="Account"
           onClick={() => setVisible("account")(true)}
           component={<VscAccount />}
         />
+        */}
         <SidebarButton
           title="Settings"
           onClick={() => setVisible("settings")(true)}

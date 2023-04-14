@@ -12,7 +12,8 @@ import useUser from "src/store/useUser";
 export const StyledPageWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  height: calc(100vh - 28px);
+  // height: calc(100vh - 28px);
+  height: 100vh;
   width: 100%;
 
   @media only screen and (max-width: 768px) {
@@ -57,7 +58,9 @@ const EditorPage: React.FC = () => {
           <Panes />
         </StyledEditorWrapper>
       </StyledPageWrapper>
+      {/*
       <BottomBar />
+      */}
     </StyledEditorWrapper>
   );
 };

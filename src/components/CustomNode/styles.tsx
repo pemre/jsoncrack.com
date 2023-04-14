@@ -76,7 +76,7 @@ export const StyledKey = styled.span<{
   font-weight: 500;
   color: ${({ theme, type = "null", objectKey = false, parent = false }) =>
     getKeyColor(theme, parent, type, objectKey)};
-  font-size: ${({ parent }) => parent && "14px"};
+  font-size: ${({ parent }) => parent && "13px"};
   overflow: hidden;
   text-overflow: ellipsis;
   padding: ${({ objectKey }) => !objectKey && 10}px;
