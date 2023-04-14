@@ -6,8 +6,6 @@ import { AiOutlineDelete, AiOutlineSave, AiOutlineFileAdd, AiOutlineEdit } from 
 import { CgArrowsMergeAltH, CgArrowsShrinkH } from "react-icons/cg";
 import { TiFlowMerge } from "react-icons/ti";
 import {
-  VscAccount,
-  VscCloud,
   VscCollapseAll,
   VscExpandAll,
   VscSettingsGear,

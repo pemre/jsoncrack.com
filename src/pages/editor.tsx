@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import styled from "styled-components";
 import { Loading } from "src/components/Loading";
 import { Sidebar } from "src/components/Sidebar";
-import { BottomBar } from "src/containers/Editor/BottomBar";
+// import { BottomBar } from "src/containers/Editor/BottomBar";
 import Panes from "src/containers/Editor/Panes";
 import useJson from "src/store/useJson";
 import useUser from "src/store/useUser";
