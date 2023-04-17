@@ -1,5 +1,4 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import Script from "next/script";
 import { createGetInitialProps } from "@mantine/next";
 import { SeoTags } from "src/components/SeoTags";
 
@@ -20,11 +19,6 @@ class MyDocument extends Document {
           <meta name="theme-color" content="#36393E" />
           <link rel="manifest" href="/manifest.json" />
           <link rel="icon" href="/favicon.ico" />
-          <Script
-            strategy="afterInteractive"
-            src="//m.servedby-buysellads.com/monetization.js"
-            type="text/javascript"
-          />
         </Head>
         <body>
           <Main />
