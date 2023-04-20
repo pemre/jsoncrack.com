@@ -9,6 +9,7 @@ export const TYPE_BACKGROUND_COLORS = {
 
   MODIFIER_GROUP: 'rgb(62 62 43)', // Yellow
 
-  // 'rgb(62 43 62)', // Pink
+  DEAL_GROUP: 'rgb(62 43 62)',     // Pink
+
   // 'rgb(43 62 43)', // Green
 };
