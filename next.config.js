@@ -3,10 +3,13 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
+const debug = process.env.NODE_ENV !== "production";
+
 /**
  * @type {import('next').NextConfig}
  */
 const config = {
+  assetPrefix: !debug ? "/jsoncrack.com/" : "",
   output: "export",
   reactStrictMode: false,
   productionBrowserSourceMaps: true,

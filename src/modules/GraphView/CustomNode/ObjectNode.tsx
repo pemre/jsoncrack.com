@@ -1,5 +1,13 @@
 import React from "react";
 import type { CustomNodeProps } from "src/modules/GraphView/CustomNode";
+
+/** *********************************************************
+ *  IMPORT CUSTOMIZATION HELPERS
+ */
+import { Title } from "../../../../customize/components/Title";
+import { getNodeStyleByType } from "../../../../customize/getNodeStyleByType";
+
+/** *********************************************************/
 import { TextRenderer } from "./TextRenderer";
 import * as Styled from "./styles";
 
@@ -25,13 +33,29 @@ const Row = ({ val, x, y, index }: RowProps) => {
   );
 };
 
-const Node = ({ node, x, y }: CustomNodeProps) => (
-  <Styled.StyledForeignObject width={node.width} height={node.height} x={0} y={0} $isObject>
-    {(node.text as Value[]).map((val, idx) => (
-      <Row val={val} index={idx} x={x} y={y} key={idx} />
-    ))}
-  </Styled.StyledForeignObject>
-);
+const Node = ({ node, x, y }: CustomNodeProps) => {
+  /** *********************************************************
+   *  USE CUSTOM CONFIG
+   */
+  const { customize } = node;
+  const _type = customize?.type || "";
+  /** *********************************************************/
+  return (
+    <Styled.StyledForeignObject
+      width={node.width}
+      height={node.height}
+      x={0}
+      y={0}
+      $isObject
+      style={getNodeStyleByType(_type)}
+    >
+      {(node.text as Value[]).map((val, idx) => (
+        <Row val={val} index={idx} x={x} y={y} key={idx} />
+      ))}
+      {_type && <Title title={_type} />}
+    </Styled.StyledForeignObject>
+  );
+};
 
 function propsAreEqual(prev: CustomNodeProps, next: CustomNodeProps) {
   return String(prev.node.text) === String(next.node.text) && prev.node.width === next.node.width;

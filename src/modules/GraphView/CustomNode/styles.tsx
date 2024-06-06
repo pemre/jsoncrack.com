@@ -68,7 +68,7 @@ export const StyledKey = styled.span<{ $parent?: boolean; $type: string; $value?
   flex: 1;
   color: ${({ theme, $type, $parent = false, $value = "" }) =>
     getTextColor({ $parent, $type, $value, theme })};
-  font-size: ${({ $parent }) => $parent && "14px"};
+  font-size: ${({ $parent }) => $parent && "13px"};
   overflow: hidden;
   text-overflow: ellipsis;
   padding: ${({ $type }) => $type !== "object" && "10px"};

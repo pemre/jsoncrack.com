@@ -2,6 +2,8 @@ import type { NodeType } from "jsonc-parser";
 
 export interface NodeData {
   id: string;
+  customize?: CustomizeData;
+  parent?: string;
   text: string | [string, string][];
   width: number;
   height: number;
@@ -12,6 +14,10 @@ export interface NodeData {
     isEmpty: boolean;
     childrenCount: number;
   };
+}
+
+interface CustomizeData {
+  type: string;
 }
 
 export interface EdgeData {

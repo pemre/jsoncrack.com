@@ -6,6 +6,14 @@ import type { CustomNodeProps } from "src/modules/GraphView/CustomNode";
 import { isContentImage } from "src/modules/GraphView/lib/utils/calculateNodeSize";
 import useGraph from "src/modules/GraphView/stores/useGraph";
 import useConfig from "src/store/useConfig";
+
+/** *********************************************************
+ *  IMPORT CUSTOMIZATION HELPERS
+ */
+import { Title } from "../../../../customize/components/Title";
+import { getNodeStyleByType } from "../../../../customize/getNodeStyleByType";
+
+/** *********************************************************/
 import { TextRenderer } from "./TextRenderer";
 import * as Styled from "./styles";
 
@@ -69,8 +77,21 @@ const Node = ({ node, x, y, hasCollapse = false }: CustomNodeProps) => {
     validateHiddenNodes();
   };
 
+  /** *********************************************************
+   *  USE CUSTOM CONFIG
+   */
+  const { customize } = node;
+  const _type = customize?.type || "";
+  /** *********************************************************/
+
   return (
-    <Styled.StyledForeignObject width={width} height={height} x={0} y={0}>
+    <Styled.StyledForeignObject
+      width={width}
+      height={height}
+      x={0}
+      y={0}
+      style={getNodeStyleByType(_type)}
+    >
       {isImage ? (
         <StyledImageWrapper>
           <StyledImage src={text as string} width="70" height="70" loading="lazy" />
@@ -82,13 +103,25 @@ const Node = ({ node, x, y, hasCollapse = false }: CustomNodeProps) => {
           data-key={JSON.stringify(text)}
           $hasCollapse={isParent && collapseButtonVisible}
         >
-          <Styled.StyledKey $value={value} $parent={isParent} $type={type}>
+          <Styled.StyledKey
+            $value={value}
+            $parent={isParent}
+            $type={type}
+            style={
+              isParent && childrenCount === 0
+                ? {
+                    position: "fixed",
+                    left: "10px",
+                    fontSize: "11px",
+                  }
+                : {}
+            }
+          >
             <TextRenderer>{value}</TextRenderer>
           </Styled.StyledKey>
           {isParent && childrenCount > 0 && childrenCountVisible && (
             <Styled.StyledChildrenCount>({childrenCount})</Styled.StyledChildrenCount>
           )}
-
           {isParent && hasCollapse && collapseButtonVisible && (
             <StyledExpand aria-label="Expand" onClick={handleExpand}>
               {isExpanded ? <MdLinkOff size={18} /> : <MdLink size={18} />}
@@ -96,6 +129,7 @@ const Node = ({ node, x, y, hasCollapse = false }: CustomNodeProps) => {
           )}
         </StyledTextNodeWrapper>
       )}
+      {_type && <Title title={_type} />}
     </Styled.StyledForeignObject>
   );
 };
